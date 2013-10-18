@@ -1,3 +1,5 @@
-The Datical DB binary should be installed here if you do not have a file repository elsewhere.
+The following files should be placed here:
 
-Datical DB Project directories should be placed here, also.
+DaticalDB.deb (or the binary of your choice)
+Your Datical DB project (should be checked out of your SCC as an entire directory)
+Your appropriate JDBC driver (e.g., mysql-connector-java-5.1.26-bin.jar)
