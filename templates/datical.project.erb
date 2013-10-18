@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
-<dbproject:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dbproject="http://datical.com/db/project/1.0" name="<%= @name %>">
-  <dbDefs xsi:type="<%= @db_type_string %>" name="<%= @db_instance %>" driver="<%= @db_driver %>" hostname="<%= @db_hostname%>" port="<%= @db_port%>" username="<%= @db_username%>" password="<%= @db_password%>" database="<%= @db_name%>"/>
-  <plans name="<%= @name %>" databaseDefs="//@dbDefs[name='<%= db_instance %>']"/>
-  <changelog href="Changelog/changelog.xml#//@databaseChangeLog"/>
+<dbproject:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dbproject="http://datical.com/db/project/1.0" name="MyDeploymentProject">
+  <dbDefs xsi:type="dbproject:MysqlDbDef" name="Development" driver="com.mysql.jdbc.Driver" hostname="localhost" port="3306" username="datical" password="cGFzc3dvcmQ=" database="dev"/>
+  <dbDefs xsi:type="dbproject:MysqlDbDef" name="QA" driver="com.mysql.jdbc.Driver" hostname="localhost" port="3306" username="datical" password="cGFzc3dvcmQ=" database="qa"/>
+  <dbDefs xsi:type="dbproject:MysqlDbDef" name="Production" driver="com.mysql.jdbc.Driver" hostname="localhost" port="3306" username="root" password="" database="foo"/>
+  <plans name="Deployment Plan" databaseDefs="//@dbDefs[name='Development'] //@dbDefs[name='QA'] //@dbDefs[name='Production']">
+    <steps from="//@dbDefs[name='Development']" to="//@dbDefs[name='QA']"/>
+    <steps from="//@dbDefs[name='QA']" to="//@dbDefs[name='Production']"/>
+  </plans>
+  <changelog href="file:/datical/projects/MyDeploymentProject/Changelog/changelog.xml#//@databaseChangeLog"/>
 </dbproject:Project>

@@ -31,6 +31,9 @@
 #
 # [*jdbc_driver*]
 # FIXME
+# 
+# [*db_instance*]
+# FIXME
 
 define daticaldb4puppet::project (
   $db_hostname          = undef,
@@ -54,6 +57,7 @@ define daticaldb4puppet::project (
     'Database type must be one of mysql, db2, oracle or mssql.')
   validate_string($path, 'Path is required.')
   validate_string($jdbc_driver, 'JDBC Driver is requried.')
+  validate_string($db_instance, 'The instance name in the Datical DB project.')
 
   #set the db depdendent settings
   case $db_type {
@@ -105,9 +109,9 @@ define daticaldb4puppet::project (
   }
 
   db_migration { $name:
+    ensure => $ensure,
+    require => File["${path}/datical.project"],
     path   => $path,
-    #db_instance => $db_instance,
-    #require => File["${path}/datical.project"],
-    ensure => $ensure
+    db_instance => $db_instance
   }
 }
