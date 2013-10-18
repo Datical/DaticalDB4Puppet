@@ -1,5 +1,5 @@
 #
-# = Class: daticaldb::project
+# = Class: DaticalDB4Puppet::project
 #
 #
 # == Parameters
@@ -32,7 +32,7 @@
 # [*jdbc_driver*]
 # FIXME
 
-define daticaldb::project (
+define DaticalDB4Puppet::project (
   $db_hostname          = undef,
   $db_username          = undef,
   $db_password          = undef,
@@ -79,12 +79,12 @@ define daticaldb::project (
   }
 
   file { "${path}":
-    source => "puppet:///modules/daticaldb/${name}",
+    source => "puppet:///modules/DaticalDB4Puppet/${name}",
     recurse => true,
   }
 
   file { "${driver_path}/${jdbc_driver}":
-    source => "puppet:///modules/daticaldb/${jdbc_driver}",
+    source => "puppet:///modules/DaticalDB4Puppet/${jdbc_driver}",
     owner   => 'root',
     group   => 'root',
     mode    => '0644'
@@ -94,14 +94,14 @@ define daticaldb::project (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('daticaldb/datical.project.erb')
+    content => template('DaticalDB4Puppet/datical.project.erb')
   }
 
   file { "${path}/daticaldb.properties":
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('daticaldb/daticaldb.properties.erb')
+    content => template('DaticalDB4Puppet/daticaldb.properties.erb')
   }
 
   db_migration { $name:

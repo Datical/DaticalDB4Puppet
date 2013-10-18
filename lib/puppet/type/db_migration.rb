@@ -1,5 +1,5 @@
 Puppet::Type.newtype(:db_migration) do
-  @doc = "db_migration allows you to run a daticaldb hammer migration from a daticaldb project.
+  @doc = "db_migration allows you to run a Datical DB hammer migration from a Datical DB project.
   "
 
   ensurable do
@@ -18,13 +18,13 @@ Puppet::Type.newtype(:db_migration) do
   end
 
   newparam(:path) do
-    desc "the path of the daticaldb project this will deploy"
+    desc "the path of the Datical DB project this will deploy"
     
     #FIXME, validate physical path?
   end
 
   newparam(:db_instance) do
-    desc "the DB Instance path of the daticaldb project this will deploy"
+    desc "the DB Instance path of the Datical DB project this will deploy"
   end
 
   newparam(:name) do

@@ -1,5 +1,5 @@
 Puppet::Type.type(:db_migration).provide :db_migration do
-  desc "db_migration is used to deploy database migrations using daticaldb's hammer command"
+  desc "db_migration is used to deploy database migrations using Datical DB's hammer command"
 
   #FIXME this should probably be dynamic, based on install path
   commands :hammer => "/usr/local/DaticalDB/repl/hammer"
