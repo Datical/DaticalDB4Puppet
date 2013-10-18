@@ -1,5 +1,5 @@
 #
-# = Class: DaticalDBPuppet::engine
+# = Class: DaticalDB4Puppet::engine
 #
 #
 # == Parameters
@@ -14,7 +14,7 @@
 #   String. Default: stdmod::dependency
 #   Name of a class that contains resources needed by this module but provided
 #   by external modules. You may leave the default value to keep the
-#   default dependencies as declared in DaticalDBPuppet/manifests/dependency.pp
+#   default dependencies as declared in DaticalDB4Puppet/manifests/dependency.pp
 #   or define a custom class name where the same resources are provided
 #   with custom ways or via other modules.
 #   Set to undef to not include any dependency class.
@@ -23,7 +23,7 @@
 #   String. Default undef.
 #   Name of a custom class to autoload to manage module's customizations
 #   If defined, stdmod class will automatically "include $my_class"
-#   Example: my_class => 'site::my_DaticalDBPuppet',
+#   Example: my_class => 'site::my_DaticalDB4Puppet',
 #
 # [*audits*]
 #   String or array. Default: undef.
@@ -44,9 +44,9 @@
 #   an internal RHN satellite server or other type of repository to load the
 #   installer RPM into.
 #
-class DaticalDBPuppet::engine (
+class DaticalDB4Puppet::engine (
   $ensure               = 'present',
-  $dependency_class     = 'DaticalDBPuppet::dependency',
+  $dependency_class     = 'DaticalDB4Puppet::dependency',
   $my_class             = undef,
   $audits               = undef, #FIXME add support for this
   $install_path         = '/usr/local/DaticalDB/',
@@ -57,8 +57,8 @@ class DaticalDBPuppet::engine (
   validate_re($ensure, ['present','absent'],
     'Valid values are: present, absent')
 
-  ### Variables defined in DaticalDBPuppet::params
-  include DaticalDBPuppet::params
+  ### Variables defined in DaticalDB4Puppet::params
+  include DaticalDB4Puppet::params
 
   file {$install_path:
     ensure => directory
@@ -71,7 +71,7 @@ class DaticalDBPuppet::engine (
       mode    => '0644',
       owner   => root,
       group   => root,
-      source  => "puppet:///modules/DaticalDBPuppet/${package_name}.deb",
+      source  => "puppet:///modules/DaticalDB4Puppet/${package_name}.deb",
       require => File[$install_path]
     }
 
