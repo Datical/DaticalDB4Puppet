@@ -1,18 +1,18 @@
-# Class: DaticalDB4Puppet::params
+# Class: daticaldb4puppet::params
 #
 # This class defines default parameters used by the main module class stdmod
 # Operating Systems differences in names and paths are addressed here
 #
 # == Variables
 #
-# Refer to DaticalDB4Puppet class for the variables defined here.
+# Refer to daticaldb4puppet class for the variables defined here.
 #
 # == Usage
 #
 # This class is not intended to be used directly.
 # It may be imported or inherited by other classes
 #
-class DaticalDB4Puppet::params {
+class daticaldb4puppet::params {
 
   ### Application related parameters
 

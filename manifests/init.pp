@@ -1,2 +1,2 @@
-class DaticalDB4Puppet {
+class daticaldb4puppet {
 }

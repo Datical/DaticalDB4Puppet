@@ -1,4 +1,4 @@
-# Class: DaticalDB4Puppet::dependency
+# Class: daticaldb4puppet::dependency
 #
 # This class contains extra resources needed by this module
 # and provided by other modules.
@@ -13,7 +13,7 @@
 # This class is not intended to be used directly.
 # Use it as reference
 #
-class DaticalDB4Puppet::dependency {
+class daticaldb4puppet::dependency {
 
   exec {'install_daticaldb_rpm':
     command => 'yum install /usr/local/Datical
