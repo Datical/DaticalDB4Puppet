@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<dbproject:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dbproject="http://datical.com/db/project/1.0" name="<%= @name %>">
+      $db_type_string = 'dbproject:MysqlDbDef'
+      $db_driver      = 'com.mysql.jdbc.Driver'
+  <dbDefs xsi:type="<%= @db_type_string %>" name="<%= @db_instance %>" driver="<%= @db_driver %>" hostname="<%= @db_hostname%>" port="<%= @db_port%>" username="<%= @db_username%>" password="<%= @db_password%>" database="<%= @db_name%>"/>
+  <plans name="${plan_name}" databaseDefs="//@dbDefs[name='<%= db_instance %>']"/>
+  <changelog href="Changelog/changelog.xml#//@databaseChangeLog"/>
+</dbproject:Project>
