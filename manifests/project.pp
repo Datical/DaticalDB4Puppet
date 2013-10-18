@@ -106,8 +106,8 @@ define daticaldb4puppet::project (
 
   db_migration { $name:
     path   => $path,
-    db_instance => $db_instance,
-    require => File["${path}/datical.project"],
+    #db_instance => $db_instance,
+    #require => File["${path}/datical.project"],
     ensure => $ensure
   }
 }
