@@ -1,0 +1,86 @@
+
+
+Prepare Puppet on Master and Node
+
+	Install Puppet Enterprise
+		start two ubuntu 12.04 ec2 instances
+		Ubuntu: wget https://s3.amazonaws.com/pe-builds/released/3.0.1/puppet-enterprise-3.0.1-ubuntu-12.04-amd64.tar.gz
+		#RedHat: wget https://s3.amazonaws.com/pe-builds/released/3.0.1/puppet-enterprise-3.0.1-el-6-x86_64.tar.gz
+		install master (specify external hostname)
+		install node
+		using web console, accept node request
+
+Prepare Node for Datical DB
+
+	install jdk on node
+
+		sudo apt-get install openjdk-7-jdk
+
+	install mysql on node
+
+		sudo apt-get install mysql-server
+
+		if you wish to have remote access
+
+		edit /etc/mysql/my.cnf and change bind address to external ip and not 127.0.0.1
+		sudo service mysql restart
+
+		mysql -u root -p mysql
+		<enter password>
+		mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password';
+
+		test connection remotely using mysql workbench
+
+Prepare DaticalDB4Puppet
+
+	get DaticalDB4Puppet
+		sudo apt-get install git
+		cd /etc/puppetlabs/puppet/modules
+		git clone https://github.com/Datical/DaticalDB4Puppet.git daticaldb4puppet
+		(no upper case in a module name? are you kidding me?!?!?)
+
+
+	The following need to be in your modules/daticaldb/files directory
+		DaicalDB.deb
+		the jdbc driver of your choice
+		Your Datical DB project
+
+Convert to DEB	
+	https://help.ubuntu.com/community/RPM/AlienHowto
+	sudo apt-get install alien (convert RPM to DEB, on master)
+	sudo alien DaticalDB-1.1.0.201308071617-0.x86_64.rpm
+	sudo cp daticaldb_1.1.0.201308071617-1_amd64.deb DaticalDB.deb
+
+edit site.pp to reflect documentation
+
+===============================================================================
+node 'ip-10-73-145-132.ec2.internal' {
+        include 'daticaldb4puppet::engine'
+
+        daticaldb4puppet::project {'MyDeploymentProject':
+                db_hostname => 'localhost',
+                db_name => 'foo',
+                db_password => '',
+                db_port => '3306',
+                db_type => 'mysql',
+                db_username => 'root',
+                path => '/datical/projects/MyDeploymentProject',
+                ensure => 'latest',
+                driver_path => '/lib64',
+                db_instance => 'Production',
+                jdbc_driver => 'mysql-connector-java-5.1.26-bin.jar'
+        }
+}
+===============================================================================
+
+NOTE: may need to create the following directories based on your node installation
+
+/datical/projects
+
+
+Done!
+
+
+Handy Tip to force run on node
+
+	sudo puppet agent --test
