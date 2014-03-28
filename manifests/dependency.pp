@@ -16,6 +16,6 @@
 class daticaldb4puppet::dependency {
 
   exec {'install_daticaldb_rpm':
-    command => 'yum install /usr/local/Datical
-
+    command => 'yum install /usr/local/Datical',
+  }
 }
